@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Anri Bakery — brand fontset (Thai + Latin), self-hosted from /public/font ── */
+@font-face {
+  font-family: "Anri Bakery";
+  src: url("/font/anri-bakery-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anri Bakery";
+  src: url("/font/anri-bakery-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anri Bakery";
+  src: url("/font/anri-bakery-italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anri Bakery";
+  src: url("/font/anri-bakery-bold-italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Anri Bakery is the primary brand typeface for both scripts. The previous
+     pairing (Playfair Display / Noto Serif Thai / Sarabun) is kept as graceful
+     fallback for any glyph the brand font lacks or until it loads. */
+  --font-display: "Anri Bakery", "Playfair Display", Georgia, serif;
+  --font-thai-display: "Anri Bakery", "Noto Serif Thai", serif;
+  --font-body: "Anri Bakery", "Sarabun", "Inter", system-ui, -apple-system, sans-serif;
+  /* Height of the fixed nav bar. Non-hero full-screen sections subtract this so
+     they fill exactly the area below the nav (kept in sync with scroll-padding-top). */
+  --nav-h: 4.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* "Page slide" feel: each full-viewport section gently snaps into place as you
+     scroll. Lives on the document scroller (NOT a new overflow container) so the
+     window scroll that ScrollProgress + Parallax rely on stays intact. */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 4.5rem; /* clears the fixed nav (~60px) so snapped sections aren't hidden */
+}
+
+/* Applied to each full-viewport top-level section (Hero, Video, chapters, CTA). */
+.snap-section {
+  scroll-snap-align: start;
+}
+
+/* Short / landscape viewports (phones held sideways, ~375–430px tall): the fixed
+   100svh sections still center their content fine, but scroll-snap fights the
+   cramped height and the hero's large vertical padding pushes the CTA off-screen.
+   Drop the snap and trim the hero padding — but KEEP each section's min-height so
+   content stays vertically centred and is never clipped by the section's
+   overflow-hidden. (Do NOT set min-height:auto here: it collapses sections below
+   their content height and the chapter body text gets cut off.) */
+@media (max-height: 600px) {
+  html {
+    scroll-snap-type: none;
+  }
+  #hero {
+    padding-top: 5.5rem !important; /* still clears the 4.5rem fixed nav */
+    padding-bottom: 2rem !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Safety net: never allow horizontal scroll from off-canvas / decorative overflow. */
+  overflow-x: clip;
+}
+
+/* Respect reduced-motion globally: kill non-essential motion + smooth scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible, consistent focus ring for keyboard users across the page. */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Thai display headlines need a touch more line-height to clear tone marks. */
+.font-thai {
+  line-height: 1.25;
+}
+
+/* ── Pass 2 — high-fidelity helpers ─────────────────────────────────────── */
+
+/* Selection in brand oxblood. */
+::selection {
+  background: #6e1e1e;
+  color: #f3ebdd;
+}
+
+/* Subtle film grain overlay — adds analog warmth over flat fills.
+   Applied via .grain on a relatively-positioned element. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* Letter-spaced eyebrow utility. */
+.eyebrow {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Thin animated underline reveal for links. */
+@media (prefers-reduced-motion: no-preference) {
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
