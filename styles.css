@@ -1,0 +1,952 @@
+/* ============================================================
+   Anri — The Untranslatable Taste
+   ============================================================ */
+
+:root {
+  --red: #8a2a1b;
+  /* hero title / accents */
+  --red-label: #93321f;
+  /* small red labels */
+  --red-btn-1: #7c2417;
+  /* button gradient top */
+  --red-btn-2: #521a10;
+  /* button gradient bottom */
+  --ink: #574438;
+  /* body copy */
+  --ink-strong: #372a22;
+  /* thai headings */
+  --cream: #f2e7d7;
+  /* parchment tone */
+  --cream-rgb: 242, 231, 215;
+
+  --font-en: "Cormorant Garamond", Georgia, serif;
+  --font-th-serif: "Noto Serif Thai", serif;
+  --font-th-sans: "Noto Sans Thai", sans-serif;
+  --font-ui: "Montserrat", sans-serif;
+
+  --maxw: 1680px;
+  --nav-h: 117px;
+  /* navbar height (logo 72px + 1.4rem padding × 2) */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent horizontal scroll WITHOUT turning the root into a nested scroll
+     container. Using `clip` (not `hidden`) avoids the Safari bug where
+     `overflow-x: hidden` on <body> traps vertical scrolling mid-page. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  max-width: 100%;
+  background: #1a1310;
+  color: var(--ink);
+  font-family: var(--font-th-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  padding: 0 clamp(1.25rem, 3vw, 3.25rem);
+  background: linear-gradient(to bottom, rgba(30, 18, 12, 0.32), rgba(30, 18, 12, 0));
+  transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* Auto-hide on scroll-down for an unobstructed read; slides back on scroll-up */
+.nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
+.nav.scrolled {
+  background: rgba(28, 17, 12, 0.86);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo-img {
+  display: block;
+  height: 72px;
+  width: auto;
+  transition: height 0.4s ease;
+}
+
+.nav.scrolled .nav-logo-img {
+  height: 58px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 1.7vw, 2.1rem);
+  margin-left: auto;
+}
+
+.nav-menu a {
+  font-family: var(--font-ui);
+  font-size: clamp(0.8rem, 0.9vw, 1rem);
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #e7d6c2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.nav-menu a:hover {
+  color: #fff;
+}
+
+.nav-menu a.is-active {
+  color: #e88b6a;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: #e7d6c2;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  padding: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.cart-btn {
+  color: inherit;
+  display: inline-flex;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
+}
+
+.nav-burger {
+  display: none;
+}
+
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
+.section {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Background image + parallax layer */
+.bg {
+  position: absolute;
+  inset: -6% 0;
+  /* extra height for parallax travel */
+  width: 100%;
+  height: 112%;
+  z-index: -2;
+  display: block;
+}
+
+.bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Legibility scrims (match each image's faded parchment zone) */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.scrim-left {
+  background: linear-gradient(100deg,
+      rgba(var(--cream-rgb), 0.5) 0%,
+      rgba(var(--cream-rgb), 0.28) 30%,
+      rgba(var(--cream-rgb), 0) 58%);
+}
+
+.scrim-right {
+  background: linear-gradient(260deg,
+      rgba(var(--cream-rgb), 0.52) 0%,
+      rgba(var(--cream-rgb), 0.3) 32%,
+      rgba(var(--cream-rgb), 0) 60%);
+}
+
+.scrim-center {
+  background: radial-gradient(120% 90% at 50% 60%,
+      rgba(28, 15, 12, 0.55) 0%,
+      rgba(28, 15, 12, 0.28) 45%,
+      rgba(28, 15, 12, 0.12) 100%);
+}
+
+/* Content layout */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1.5rem, 5.5vw, 6rem);
+}
+
+.content-left {
+  justify-content: flex-start;
+}
+
+.content-right {
+  justify-content: flex-end;
+}
+
+.content-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.copy {
+  max-width: 44%;
+}
+
+.content-center .copy {
+  max-width: 60%;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.title-en {
+  font-family: var(--font-en);
+  color: var(--red);
+  font-weight: 600;
+  line-height: 1.02;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.title-th {
+  font-family: var(--font-th-serif);
+  color: var(--ink-strong);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.label {
+  font-family: var(--font-ui);
+  color: var(--red-label);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-th-sans);
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.95;
+  margin: 0;
+}
+
+.ornament {
+  color: var(--red);
+  opacity: 0.75;
+}
+
+.ornament-inline {
+  color: var(--red);
+  font-size: 0.62em;
+  vertical-align: middle;
+  margin-right: 0.15em;
+  opacity: 0.8;
+}
+
+.title-th-inline {
+  font-family: var(--font-th-serif);
+}
+
+.title-mixed {
+  display: block;
+}
+
+/* --- HERO (Section 1) --- */
+.hero-title {
+  font-size: clamp(2.6rem, 5.8vw, 6.4rem);
+  margin-bottom: 0.35em;
+}
+
+.hero-th {
+  font-size: clamp(1.3rem, 2.15vw, 2.4rem);
+  margin-bottom: 1.4em;
+  font-weight: 600;
+}
+
+.hero .label {
+  font-size: clamp(0.7rem, 0.92vw, 1rem);
+  margin-bottom: 1.1em;
+}
+
+.hero .body {
+  font-size: clamp(0.9rem, 1.18vw, 1.18rem);
+  max-width: 50ch;
+}
+
+.hero .copy {
+  max-width: 42%;
+}
+
+/* --- CHAPTER (Section 3) --- */
+.chapter .content {
+  align-items: center;
+}
+
+.chapter .copy {
+  max-width: 42%;
+}
+
+.chapter .label {
+  font-family: var(--font-en);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  margin-bottom: 0.4em;
+  font-weight: 500;
+}
+
+.chapter .title-en {
+  font-size: clamp(1.8rem, 3vw, 3.4rem);
+}
+
+.chapter .title-th {
+  font-size: clamp(1.15rem, 1.85vw, 2.05rem);
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.chapter .ornament {
+  font-size: clamp(0.9rem, 1.2vw, 1.4rem);
+  margin: 1.1em 0;
+}
+
+.chapter .body {
+  font-size: clamp(0.88rem, 1.14vw, 1.15rem);
+}
+
+/* --- MAKER / CRAFT / DESIGN (Sections 4,5,6) --- */
+.maker .copy,
+.craft .copy,
+.design .copy {
+  max-width: 40%;
+}
+
+.maker .title-en,
+.craft .title-en,
+.design .title-en {
+  font-size: clamp(1.6rem, 2.7vw, 3.1rem);
+  margin-bottom: 0.7em;
+}
+
+.maker .body {
+  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+  max-width: 50ch;
+}
+
+.craft .body {
+  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+}
+
+.design .body {
+  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+  max-width: 60ch;
+}
+
+.design .copy {
+  max-width: 50%;
+}
+
+.design .title-en {
+  font-size: clamp(1.5rem, 2.5vw, 2.9rem);
+  white-space: nowrap;
+}
+
+/* --- END / CTA (Section 7) --- */
+.end-th {
+  font-family: var(--font-th-serif);
+  color: #f3e3d0;
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.75vw, 2rem);
+  line-height: 1.55;
+  margin: 0 0 0.2em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.end-th-big {
+  font-size: clamp(1.7rem, 3vw, 3.4rem);
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.2em;
+}
+
+.end-en {
+  font-family: var(--font-en);
+  font-style: italic;
+  color: #ecd9c2;
+  font-size: clamp(1.25rem, 2vw, 2.3rem);
+  margin: 0.5em 0 1.6em;
+  font-weight: 500;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  min-width: clamp(240px, 26vw, 360px);
+  padding: clamp(0.85rem, 1.2vw, 1.15rem) clamp(1.6rem, 2.4vw, 2.6rem);
+  background: linear-gradient(180deg, var(--red-btn-1), var(--red-btn-2));
+  color: #f5e6d4;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.35vw, 1.5rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(245, 230, 212, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+}
+
+.cta-btn svg {
+  flex-shrink: 0;
+}
+
+/* Hero variant — a touch smaller and left-aligned within the copy */
+.cta-hero {
+  margin-top: clamp(1.4rem, 2.2vw, 2.2rem);
+  min-width: clamp(200px, 20vw, 280px);
+  font-size: clamp(0.85rem, 1.05vw, 1.15rem);
+  gap: 1rem;
+}
+
+/* End-section scan-to-preorder QR — desktop only (hidden by default; the
+   button shows on touch devices, the QR replaces it from 769px up). */
+.end-qr {
+  display: none;
+}
+
+.end-qr-code {
+  width: 168px;
+  height: 168px;
+  padding: 14px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38);
+}
+
+.end-qr-code img,
+.end-qr-code canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.end-qr-label {
+  margin-top: 0.95rem;
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: #f5e6d4;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.end-qr-label span {
+  opacity: 0.7;
+  letter-spacing: 2px;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   VIDEO (Section 2)
+   ============================================================ */
+.video-section {
+  aspect-ratio: 16 / 9;
+  background: #1a1310;
+}
+
+/* Ambient backdrop behind the video — shown at full opacity. */
+.video-bg {
+  transform: scale(1.08);
+  /* hide edges */
+}
+
+/* Centered video box — controls live inside so they track the video. */
+.video-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(66%, 78vh * 16 / 9);
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.story-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-controls {
+  position: absolute;
+  right: clamp(0.6rem, 1.4vw, 1.2rem);
+  bottom: clamp(0.6rem, 1.4vw, 1.2rem);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.vc-btn {
+  width: clamp(38px, 3.4vw, 46px);
+  height: clamp(38px, 3.4vw, 46px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(20, 12, 9, 0.45);
+  color: #f5e6d4;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.vc-btn:hover {
+  background: rgba(122, 36, 23, 0.75);
+  transform: scale(1.06);
+}
+
+.vc-btn .ic-play {
+  display: none;
+}
+
+.vc-btn.is-paused .ic-play {
+  display: block;
+}
+
+.vc-btn.is-paused .ic-pause {
+  display: none;
+}
+
+/* ============================================================
+   SCROLL CUE (hero)
+   ============================================================ */
+.scroll-cue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 42px;
+  border: 1.5px solid rgba(120, 70, 45, 0.6);
+  border-radius: 14px;
+  z-index: 3;
+}
+
+.scroll-cue span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: rgba(120, 70, 45, 0.8);
+  animation: cue 1.8s ease-in-out infinite;
+}
+
+@keyframes cue {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   DESKTOP — FULL-SCREEN SECTIONS (>= 769px)
+   ============================================================ */
+@media (min-width: 769px) {
+
+  /* Section 1 (hero): fill the entire viewport; the transparent nav
+     overlays the top of the image. */
+  .hero {
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  /* End section: swap the tappable button for the scan-to-preorder QR
+     (the hero button scrolls the user down to it). */
+  .end #endPreorder {
+    display: none;
+  }
+
+  .end .end-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(1.4rem, 2.2vw, 2.2rem);
+  }
+
+  /* Remaining sections: also fill the entire viewport. */
+  .section:not(.hero) {
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  /* Offset their content down by the navbar height so it stays clear
+     of the fixed nav bar while the section itself is full-screen. */
+  /* .section:not(.hero) .content {
+    padding-top: var(--nav-h);
+  } */
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (<= 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .section {
+    aspect-ratio: 941 / 1672;
+  }
+
+  .video-section {
+    aspect-ratio: 9 / 16;
+  }
+
+  .bg {
+    inset: -4% 0;
+    height: 108%;
+  }
+
+  /* Nav collapses to logo + burger */
+  .nav {
+    padding: 0.9rem 1.15rem;
+  }
+
+  .nav-menu,
+  .nav-right {
+    display: none;
+  }
+
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #f0dcc4;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* Mobile menu drawer — full solid panel that grows with content */
+  .nav.menu-open {
+    flex-wrap: wrap;
+    background: rgba(24, 14, 10, 0.98);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav.menu-open .nav-menu {
+    order: 3;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.35rem;
+    margin: 0;
+    padding: 2rem 1.5rem 1.25rem;
+    background: transparent;
+  }
+
+  .nav.menu-open .nav-right {
+    order: 4;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-bottom: 1.75rem;
+    border-top: 1px solid rgba(233, 201, 163, 0.16);
+    margin-top: 0.25rem;
+    padding-top: 1.5rem;
+  }
+
+  .nav.menu-open .nav-menu a {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Text overlays reflow: full-width columns, positioned per composition */
+  .content {
+    padding: 0 7vw;
+  }
+
+  .copy,
+  .content-center .copy {
+    max-width: 100%;
+  }
+
+  .scrim-left {
+    background: linear-gradient(to bottom, rgba(var(--cream-rgb), 0.42) 0%, rgba(var(--cream-rgb), 0.15) 34%, rgba(var(--cream-rgb), 0) 55%);
+  }
+
+  .scrim-right {
+    background: linear-gradient(to bottom, rgba(var(--cream-rgb), 0.42) 0%, rgba(var(--cream-rgb), 0.15) 34%, rgba(var(--cream-rgb), 0) 55%);
+  }
+
+  /* HERO: text at top over sky */
+  .hero .content {
+    align-items: flex-start;
+    padding-top: 16vh;
+  }
+
+  .hero .copy {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(2.7rem, 13vw, 4.4rem);
+  }
+
+  .hero-th {
+    font-size: clamp(1.4rem, 5.6vw, 2rem);
+    margin-bottom: 0.9em;
+  }
+
+  .hero .label {
+    font-size: 0.72rem;
+    margin-bottom: 0.9em;
+  }
+
+  .hero .body {
+    font-size: 1rem;
+    max-width: 90%;
+    line-height: 1.85;
+  }
+
+  /* CHAPTER / MAKER / CRAFT / DESIGN: text top on portrait */
+  .chapter .content,
+  .maker .content,
+  .craft .content,
+  .design .content {
+    align-items: flex-start;
+    padding-top: 12vh;
+    justify-content: flex-start;
+  }
+
+  .chapter .copy,
+  .maker .copy,
+  .craft .copy,
+  .design .copy {
+    max-width: 100%;
+  }
+
+  .chapter .label {
+    font-size: 1.2rem;
+  }
+
+  .chapter .title-en {
+    font-size: clamp(1.9rem, 8.5vw, 2.8rem);
+  }
+
+  .chapter .title-th {
+    font-size: clamp(1.2rem, 5vw, 1.7rem);
+  }
+
+  .chapter .ornament {
+    margin: 0.8em 0;
+  }
+
+  .chapter .body,
+  .maker .body,
+  .craft .body,
+  .design .body {
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .maker .title-en,
+  .craft .title-en,
+  .design .title-en {
+    font-size: clamp(1.8rem, 7.5vw, 2.6rem);
+    white-space: normal;
+  }
+
+  /* Sections 4 & 6 mobile art places subject at bottom → text top-left already ok.
+     Section 5 (craft) subject top-left → push text lower */
+  .craft .content {
+    align-items: flex-end;
+    padding-bottom: 10vh;
+  }
+
+  .craft .scrim-right {
+    background: linear-gradient(to top, rgba(var(--cream-rgb), 0.5) 0%, rgba(var(--cream-rgb), 0.18) 34%, rgba(var(--cream-rgb), 0) 58%);
+  }
+
+  /* END */
+  .content-center .copy {
+    max-width: 92%;
+  }
+
+  .end-th {
+    font-size: clamp(1.2rem, 5.4vw, 1.8rem);
+  }
+
+  .end-th-big {
+    font-size: clamp(1.9rem, 8vw, 2.8rem);
+  }
+
+  .end-en {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .cta-btn {
+    min-width: 78vw;
+    font-size: 1.05rem;
+    gap: 1rem;
+  }
+
+  .vc-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 2.55rem;
+  }
+
+  .hero .content {
+    padding-top: 13vh;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-cue span {
+    animation: none;
+  }
+
+  .anim {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
