@@ -2,221 +2,228 @@
 <html lang="th">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Anri — The Untranslatable Taste | ไส้อั่วครัวซองต์</title>
-<meta name="description"
-  content="Anri Bakery presents the Sai Oua croissant — a taste that cannot be translated. รสชาติที่อธิบายไม่ได้" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anri — The Untranslatable Taste | ไส้อั่วครัวซองต์</title>
+  <meta name="description"
+    content="Anri Bakery presents the Sai Oua croissant — a taste that cannot be translated. รสชาติที่อธิบายไม่ได้" />
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="Images/logo.png" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/logo.png" />
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap"
-  rel="stylesheet" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-<link rel="stylesheet" href="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-<!-- ===================== NAV ===================== -->
-<header class="nav" id="nav">
-  <a class="nav-logo" href="#hero" aria-label="Anri home">
-    <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/logo.png" alt="Anri" class="nav-logo-img" />
-  </a>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <a class="nav-logo" href="#hero" aria-label="Anri home">
+      <img src="Images/logo.png" alt="Anri" class="nav-logo-img" />
+    </a>
 
-  <nav class="nav-menu" aria-label="Primary">
-    <a href="https://anribakery.com/#signature" target="_blank">ANRI'S SIGNATURE</a>
-    <a href="https://anribakery.com/#menu" target="_blank">ไำๆพ</a>
-    <a href="https://anribakery.com/#story" target="_blank">ANRI's STORY</a>
-    <a href="https://anribakery.com/#shops" target="_blank">OUR SHOPS</a>
-    <a href="https://anribakery.com/#delivery" target="_blank">DELIVERY</a>
-    <a href="https://anribakery.com/member" target="_blank">MEMBER</a>
-    <a href="https://anribakery.com/#contact" target="_blank">CONTACT</a>
-  </nav>
+    <nav class="nav-menu" aria-label="Primary">
+      <a href="https://anribakery.com/#signature" target="_blank">ANRI'S SIGNATURE</a>
+      <a href="https://anribakery.com/#menu" target="_blank">MENU</a>
+      <a href="https://anribakery.com/#story" target="_blank">ANRI's STORY</a>
+      <a href="https://anribakery.com/#shops" target="_blank">OUR SHOPS</a>
+      <a href="https://anribakery.com/#delivery" target="_blank">DELIVERY</a>
+      <a href="https://anribakery.com/member" target="_blank">MEMBER</a>
+      <a href="https://anribakery.com/#contact" target="_blank">CONTACT</a>
+    </nav>
 
-  <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</header>
+    <!-- <div class="nav-right">
+    <button class="lang-toggle" type="button" aria-label="Switch language">
+      TH
+      <svg width="10" height="7" viewBox="0 0 10 7" aria-hidden="true">
+        <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div> -->
 
-<main>
-  <!-- ===================== SECTION 1 — HERO ===================== -->
-  <section class="section hero" id="hero">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="Images/mobile/section-1.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-1.png"
-        alt="Anri Sai Oua croissant on a plate beside a northern Thai lake at dawn" />
-    </picture>
-    <div class="scrim scrim-left"></div>
-    <div class="content content-left">
-      <div class="copy">
-        <h1 class="title-en hero-title anim">The<br />Untranslatable<br />Taste</h1>
-        <h2 class="title-th hero-th anim">รสชาติที่ไม่สามารถอธิบายได้</h2>
-        <p class="label anim">CAMPAIGN BACKGROUND</p>
-        <p class="body anim">10 ปีที่ผ่านมา Anri ได้แปลความเป็นญี่ปุ่น ผ่านเมนู Aomori Apple Pie
-          และอื่นๆให้คนไทยมาโดยตลอด ในวันนี้ถึงเวลาแล้วที่ Anri จะเสาะหาของดีของไทย เพื่อแปลออกมาเป็นภาษาของ Anri บ้าง
-        </p>
-        <a href="#end" class="cta-btn cta-hero anim" id="heroPreorder">
-          <span>PREORDER NOW</span>
-          <svg width="34" height="12" viewBox="0 0 34 12" fill="none" aria-hidden="true">
-            <path d="M0 6h32M27 1l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </a>
-      </div>
-    </div>
-    <!-- <div class="scroll-cue" aria-hidden="true"><span></span></div> -->
-  </section>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-  <!-- ===================== SECTION 2 — VIDEO ===================== -->
-  <section class="section video-section" id="story-video">
-    <picture class="bg video-bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-2.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-2.png"
-        alt="Misty mountains of northern Thailand at sunrise" />
-    </picture>
-    <div class="video-frame">
-      <video id="storyVideo" class="story-video" poster="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Videos/poster.jpg" autoplay muted loop playsinline
-        preload="metadata">
-        <source src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Videos/Anri_OurStoryToThailand_web.mp4" type="video/mp4" />
-      </video>
-      <div class="video-controls">
-        <button class="vc-btn" id="vcPlay" type="button" aria-label="Pause video" aria-pressed="false">
-          <svg class="ic-pause" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
-            <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
-          </svg>
-          <svg class="ic-play" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 5l12 7-12 7V5z" fill="currentColor" />
-          </svg>
-        </button>
-        <button class="vc-btn" id="vcFull" type="button" aria-label="Fullscreen">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.7"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SECTION 3 — 1st CHAPTER ===================== -->
-  <section class="section chapter" id="chapter">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-3.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-3.png"
-        alt="Anri chef gazing over the misty mountains and a Lanna temple in Chiang Mai" />
-    </picture>
-    <div class="scrim scrim-right"></div>
-    <div class="content content-right">
-      <div class="copy">
-        <p class="label anim">1st Chapter</p>
-        <h2 class="title-en anim">Chef's Journey to Chiang Mai</h2>
-        <h3 class="title-th anim">เมนูที่อธิบายไม่ได้จากเชียงใหม่</h3>
-        <p class="body anim">เมนูแห่งความบังเอิญ ที่เชฟได้รับการแนะนำให้ไปลองชิมจากเจ้าของที่พัก <br />จนได้มาเจอ
-          “ไส้อั่วคำแปง” รสชาติอันเป็นเอกลักษณ์ที่แม้แต่เชฟคนญี่ปุ่นก็ไม่สามารถอธิบายออกมาได้</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SECTION 4 — THE MAKER ===================== -->
-  <section class="section maker" id="maker">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-4.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-4.png"
-        alt="Mae Kampaeng hand-making traditional Sai Oua in a rustic Chiang Mai kitchen" />
-    </picture>
-    <div class="scrim scrim-left"></div>
-    <div class="content content-left">
-      <div class="copy">
-        <h2 class="title-en title-mixed anim"> The Maker
-          – <span class="title-th-inline">“คำแปง”</span></h2>
-        <p class="body anim">ไส้อั่วที่อยู่ในครัวซองต์ชิ้นนี้ ถูกสรรสร้างขึ้นโดยครอบครัวของคุณแม่คำแปง
-          ผู้ทำไส้อั่วพื้นบ้านจากจังหวัดเชียงใหม่ ทั้งเครื่องแกงตำเอง เนื้อหมูแน่นมันน้อย
-          ที่มอบความอร่อยจากรสมือคนพื้นที่แท้ๆ</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SECTION 5 — THE CRAFT ===================== -->
-  <section class="section craft" id="craft">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-5.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-5.png" alt="Sai Oua sausages grilling over charcoal embers" />
-    </picture>
-    <div class="scrim scrim-right"></div>
-    <div class="content content-right">
-      <div class="copy">
-        <h2 class="title-en title-mixed anim"> The Craft
-          – <span class="title-th-inline">“ไส้อั่ว”</span></h2>
-        <p class="body anim">ไส้อั่วที่ผลิตด้วยมือในจำนวนจำกัดต่อวัน ทุกๆเส้นจะต้องผ่านการปรุง ย่าง และพักอย่างเหมาะสม
-          อีกทั้งยังคงค่อยๆย่างบนเตาถ่านด้วยมือเหมือนที่คุณแม่คำแปงทำมาตลอด</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SECTION 6 — THE DESIGN ===================== -->
-  <section class="section design" id="design">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-6.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-6.png"
-        alt="A woven Lanna bamboo lantern beside the lattice-wrapped Sai Oua croissant" />
-    </picture>
-    <div class="scrim scrim-left"></div>
-    <div class="content content-left">
-      <div class="copy">
-        <h2 class="title-en title-mixed anim"> The
-          Design – <span class="title-th-inline">“โคมลายสานล้านนา”</span></h2>
-        <p class="body anim">อีกหนึ่งเอกลักษณ์ภาคเหนือที่สร้างแรงบันดาลใจให้เชฟของอันริ
-          งานหัตถกรรมพื้นบ้านล้านนาที่ประดับประดาอยู่ทั่วเมือง ถูกนำมาสร้างเป็นแป้งครัวซองต์ที่พันรอบไส้อั่ว
-          เกิดเป็นลายสานเหมือนโคมไม้ไผ่ที่หุ้มของดีจากภาคเหนือไว้ภายใน
-          รอที่จะส่งมอบรสชาติแสนอร่อยที่แม้แต่เชฟก็อธิบายไม่ได้</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SECTION 7 — END / CTA ===================== -->
-  <section class="section end" id="end">
-    <picture class="bg">
-      <source media="(max-width: 768px)" srcset="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/mobile/section-7.png" />
-      <img src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/Images/desktop/section-7.png" alt="Sunrise over the misty mountains of northern Thailand" />
-    </picture>
-    <div class="scrim scrim-center"></div>
-    <div class="content content-center">
-      <div class="copy">
-        <h2 class="end-th anim">และคุณคือกลุ่มแรกที่ได้ลิ้มลองรสชาติที่<br /><span
-            class="end-th-big">“ไม่สามารถอธิบายได้นี้”</span></h2>
-        <p class="end-en anim">Early Access Batch</p>
-        <!-- Tablet / mobile: tappable preorder button -->
-        <a href="https://anribakery.com/preorder" target="_blank" rel="noopener"
-          class="cta-btn anim" id="endPreorder">
-          <span>PREORDER NOW</span>
-          <svg width="34" height="12" viewBox="0 0 34 12" fill="none" aria-hidden="true">
-            <path d="M0 6h32M27 1l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </a>
-        <!-- Desktop: scan-to-preorder QR code (hero button scrolls here) -->
-        <div class="end-qr anim" id="endQr">
-          <div class="end-qr-code" id="endQrCode" role="img"
-            aria-label="QR code — scan to preorder"></div>
-          <p class="end-qr-label">สแกนเพื่อสั่งจอง<br /><span>SCAN TO PREORDER</span></p>
+  <main>
+    <!-- ===================== SECTION 1 — HERO ===================== -->
+    <section class="section hero" id="hero">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-1.png" />
+        <img src="Images/desktop/section-1.png"
+          alt="Anri Sai Oua croissant on a plate beside a northern Thai lake at dawn" />
+      </picture>
+      <div class="scrim scrim-left"></div>
+      <div class="content content-left">
+        <div class="copy">
+          <h1 class="title-en hero-title anim">The<br />Untranslatable<br />Taste</h1>
+          <h2 class="title-th hero-th anim">รสชาติที่ไม่สามารถอธิบายได้</h2>
+          <p class="label anim">CAMPAIGN BACKGROUND</p>
+          <p class="body anim">10 ปีที่ผ่านมา Anri ได้แปลความเป็นญี่ปุ่น ผ่านเมนู Aomori Apple Pie
+            และอื่นๆให้คนไทยมาโดยตลอด ในวันนี้ถึงเวลาแล้วที่ Anri จะเสาะหาของดีของไทย เพื่อแปลออกมาเป็นภาษาของ Anri บ้าง
+          </p>
+          <a href="#end" class="cta-btn cta-hero anim" id="heroPreorder">
+            <span>PREORDER NOW</span>
+            <svg width="34" height="12" viewBox="0 0 34 12" fill="none" aria-hidden="true">
+              <path d="M0 6h32M27 1l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+      <!-- <div class="scroll-cue" aria-hidden="true"><span></span></div> -->
+    </section>
 
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<!-- QR code generator (hero desktop scan-to-preorder) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://github.com/Maithree-Tecmove/anri-sai-oua-story/blob/main/script.js"></script>
+    <!-- ===================== SECTION 2 — VIDEO ===================== -->
+    <section class="section video-section" id="story-video">
+      <picture class="bg video-bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-2.png" />
+        <img src="Images/desktop/section-2.png" alt="Misty mountains of northern Thailand at sunrise" />
+      </picture>
+      <div class="video-frame">
+        <video id="storyVideo" class="story-video" poster="Videos/poster.jpg" autoplay muted loop playsinline
+          preload="metadata">
+          <source src="Videos/Anri_OurStoryToThailand_web.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="vc-btn" id="vcPlay" type="button" aria-label="Pause video" aria-pressed="false">
+            <svg class="ic-pause" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+              <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+            </svg>
+            <svg class="ic-play" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 5l12 7-12 7V5z" fill="currentColor" />
+            </svg>
+          </button>
+          <button class="vc-btn" id="vcFull" type="button" aria-label="Fullscreen">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 3 — 1st CHAPTER ===================== -->
+    <section class="section chapter" id="chapter">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-3.png" />
+        <img src="Images/desktop/section-3.png"
+          alt="Anri chef gazing over the misty mountains and a Lanna temple in Chiang Mai" />
+      </picture>
+      <div class="scrim scrim-right"></div>
+      <div class="content content-right">
+        <div class="copy">
+          <p class="label anim">1st Chapter</p>
+          <h2 class="title-en anim">Chef's Journey to Chiang Mai</h2>
+          <h3 class="title-th anim">เมนูที่อธิบายไม่ได้จากเชียงใหม่</h3>
+          <p class="body anim">เมนูแห่งความบังเอิญ ที่เชฟได้รับการแนะนำให้ไปลองชิมจากเจ้าของที่พัก <br />จนได้มาเจอ
+            “ไส้อั่วคำแปง” รสชาติอันเป็นเอกลักษณ์ที่แม้แต่เชฟคนญี่ปุ่นก็ไม่สามารถอธิบายออกมาได้</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 4 — THE MAKER ===================== -->
+    <section class="section maker" id="maker">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-4.png" />
+        <img src="Images/desktop/section-4.png"
+          alt="Mae Kampaeng hand-making traditional Sai Oua in a rustic Chiang Mai kitchen" />
+      </picture>
+      <div class="scrim scrim-left"></div>
+      <div class="content content-left">
+        <div class="copy">
+          <h2 class="title-en title-mixed anim"> The Maker
+            – <span class="title-th-inline">“คำแปง”</span></h2>
+          <p class="body anim">ไส้อั่วที่อยู่ในครัวซองต์ชิ้นนี้ ถูกสรรสร้างขึ้นโดยครอบครัวของคุณแม่คำแปง
+            ผู้ทำไส้อั่วพื้นบ้านจากจังหวัดเชียงใหม่ ทั้งเครื่องแกงตำเอง เนื้อหมูแน่นมันน้อย
+            ที่มอบความอร่อยจากรสมือคนพื้นที่แท้ๆ</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 5 — THE CRAFT ===================== -->
+    <section class="section craft" id="craft">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-5.png" />
+        <img src="Images/desktop/section-5.png" alt="Sai Oua sausages grilling over charcoal embers" />
+      </picture>
+      <div class="scrim scrim-right"></div>
+      <div class="content content-right">
+        <div class="copy">
+          <h2 class="title-en title-mixed anim"> The Craft
+            – <span class="title-th-inline">“ไส้อั่ว”</span></h2>
+          <p class="body anim">ไส้อั่วที่ผลิตด้วยมือในจำนวนจำกัดต่อวัน ทุกๆเส้นจะต้องผ่านการปรุง ย่าง และพักอย่างเหมาะสม
+            อีกทั้งยังคงค่อยๆย่างบนเตาถ่านด้วยมือเหมือนที่คุณแม่คำแปงทำมาตลอด</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 6 — THE DESIGN ===================== -->
+    <section class="section design" id="design">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-6.png" />
+        <img src="Images/desktop/section-6.png"
+          alt="A woven Lanna bamboo lantern beside the lattice-wrapped Sai Oua croissant" />
+      </picture>
+      <div class="scrim scrim-left"></div>
+      <div class="content content-left">
+        <div class="copy">
+          <h2 class="title-en title-mixed anim"> The
+            Design – <span class="title-th-inline">“โคมลายสานล้านนา”</span></h2>
+          <p class="body anim">อีกหนึ่งเอกลักษณ์ภาคเหนือที่สร้างแรงบันดาลใจให้เชฟของอันริ
+            งานหัตถกรรมพื้นบ้านล้านนาที่ประดับประดาอยู่ทั่วเมือง ถูกนำมาสร้างเป็นแป้งครัวซองต์ที่พันรอบไส้อั่ว
+            เกิดเป็นลายสานเหมือนโคมไม้ไผ่ที่หุ้มของดีจากภาคเหนือไว้ภายใน
+            รอที่จะส่งมอบรสชาติแสนอร่อยที่แม้แต่เชฟก็อธิบายไม่ได้</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 7 — END / CTA ===================== -->
+    <section class="section end" id="end">
+      <picture class="bg">
+        <source media="(max-width: 768px)" srcset="Images/mobile/section-7.png" />
+        <img src="Images/desktop/section-7.png" alt="Sunrise over the misty mountains of northern Thailand" />
+      </picture>
+      <div class="scrim scrim-center"></div>
+      <div class="content content-center">
+        <div class="copy">
+          <h2 class="end-th anim">และคุณคือกลุ่มแรกที่ได้ลิ้มลองรสชาติที่<br /><span
+              class="end-th-big">“ไม่สามารถอธิบายได้นี้”</span></h2>
+          <p class="end-en anim">Early Access Batch</p>
+          <!-- Tablet / mobile: tappable preorder button -->
+          <a href="https://anribakery.com/preorder" target="_blank" rel="noopener" class="cta-btn anim"
+            id="endPreorder">
+            <span>PREORDER NOW</span>
+            <svg width="34" height="12" viewBox="0 0 34 12" fill="none" aria-hidden="true">
+              <path d="M0 6h32M27 1l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <!-- Desktop: scan-to-preorder QR code (hero button scrolls here) -->
+          <div class="end-qr anim" id="endQr">
+            <div class="end-qr-code" id="endQrCode" role="img" aria-label="QR code — scan to preorder"></div>
+            <p class="end-qr-label">สแกนเพื่อสั่งจอง<br /><span>SCAN TO PREORDER</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- QR code generator (hero desktop scan-to-preorder) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
