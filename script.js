@@ -192,11 +192,10 @@
   });
 
   /* Section 2 (video): reveal the framed player so it doesn't just pop in.
-     The frame is centered via a CSS translate(-50%, -50%); mirror that with
-     xPercent/yPercent so GSAP's transform keeps it centered while it lifts. */
+     The frame is centered in CSS via inset:0 + margin:auto (no transform), so
+     GSAP can freely animate translate/scale here without unbalancing it. */
   var videoFrame = document.querySelector(".video-frame");
   if (videoFrame) {
-    gsap.set(videoFrame, { xPercent: -50, yPercent: -50 });
     gsap.fromTo(
       videoFrame,
       { opacity: 0, scale: 0.94, y: 34 },
