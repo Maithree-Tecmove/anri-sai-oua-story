@@ -330,7 +330,7 @@ img {
 }
 
 .hero .body {
-  font-size: clamp(0.9rem, 1.18vw, 1.18rem);
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
   max-width: 50ch;
 }
 
@@ -373,7 +373,7 @@ img {
 }
 
 .chapter .body {
-  font-size: clamp(0.88rem, 1.14vw, 1.15rem);
+  font-size: clamp(0.88rem, 1.2vw, 1.2rem);
 }
 
 /* --- MAKER / CRAFT / DESIGN (Sections 4,5,6) --- */
@@ -391,16 +391,16 @@ img {
 }
 
 .maker .body {
-  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+  font-size: clamp(0.85rem, 1.2vw, 1.2rem);
   max-width: 50ch;
 }
 
 .craft .body {
-  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+  font-size: clamp(0.85rem, 1.2vw, 1.2rem);
 }
 
 .design .body {
-  font-size: clamp(0.85rem, 1.14vw, 1.14rem);
+  font-size: clamp(0.85rem, 1.2vw, 1.2rem);
   max-width: 60ch;
 }
 
@@ -700,9 +700,20 @@ img {
     height: 108%;
   }
 
-  /* Nav collapses to logo + burger */
+  /* Nav collapses to logo + burger. A lighter bar (smaller logo + tighter
+     padding) frees vertical space and gives the hero copy room to clear it.
+     --nav-h is redefined here so content can reliably offset below it. */
+  :root {
+    --nav-h: 76px;
+  }
+
   .nav {
-    padding: 0.9rem 1.15rem;
+    padding: 0.7rem 1.15rem;
+  }
+
+  .nav-logo-img,
+  .nav.scrolled .nav-logo-img {
+    height: 46px;
   }
 
   .nav-menu,
@@ -800,14 +811,29 @@ img {
     background: linear-gradient(to bottom, rgba(var(--cream-rgb), 0.42) 0%, rgba(var(--cream-rgb), 0.15) 34%, rgba(var(--cream-rgb), 0) 55%);
   }
 
-  /* HERO: text at top over sky */
+  /* HERO: text anchored at the top over the open sky/lake; the copy is
+     long, so lift the block up and tighten the rhythm so it clears the
+     croissant subject in the lower half. */
   .hero .content {
     align-items: flex-start;
-    padding-top: 16vh;
+    /* Clear the fixed nav by its real height + breathing room, so the title
+       never tucks under the logo — reliable across every phone size, unlike
+       a raw vh value. */
+    padding-top: calc(var(--nav-h) + 1.5rem);
   }
 
   .hero .copy {
     max-width: 100%;
+  }
+
+  /* Taller legibility scrim on the hero — the copy reaches further down
+     into the image than the other sections, so the parchment veil follows. */
+  .hero .scrim-left {
+    background: linear-gradient(to bottom,
+        rgba(var(--cream-rgb), 0.5) 0%,
+        rgba(var(--cream-rgb), 0.34) 40%,
+        rgba(var(--cream-rgb), 0.12) 68%,
+        rgba(var(--cream-rgb), 0) 82%);
   }
 
   .hero-title {
@@ -815,28 +841,33 @@ img {
   }
 
   .hero-th {
-    font-size: clamp(1.4rem, 5.6vw, 2rem);
-    margin-bottom: 0.9em;
+    font-size: clamp(1.35rem, 5.4vw, 1.9rem);
+    margin-bottom: 0.65em;
   }
 
   .hero .label {
     font-size: 0.72rem;
-    margin-bottom: 0.9em;
+    margin-bottom: 0.7em;
   }
 
   .hero .body {
-    font-size: 1rem;
-    max-width: 90%;
-    line-height: 1.85;
+    font-size: 0.95rem;
+    max-width: 100%;
+    line-height: 1.7;
   }
 
-  /* CHAPTER / MAKER / CRAFT / DESIGN: text top on portrait */
+  /* CHAPTER / MAKER / CRAFT / DESIGN: every portrait composition keeps its
+     subject in the lower half, so the copy sits in the open top zone. One
+     consistent anchor = a predictable reading rhythm as the user scrolls. */
   .chapter .content,
   .maker .content,
   .craft .content,
   .design .content {
     align-items: flex-start;
-    padding-top: 12vh;
+    /* Nav auto-hides while reading but returns on scroll-up, so keep the
+       copy below it here too. max() guarantees nav clearance on short
+       phones while letting taller phones breathe with a little more space. */
+    padding-top: max(calc(var(--nav-h) + 1rem), 9vh);
     justify-content: flex-start;
   }
 
@@ -878,15 +909,32 @@ img {
     white-space: normal;
   }
 
-  /* Sections 4 & 6 mobile art places subject at bottom → text top-left already ok.
-     Section 5 (craft) subject top-left → push text lower */
-  .craft .content {
-    align-items: flex-end;
-    padding-bottom: 10vh;
+  /* MAKER (§4) & CRAFT (§5): the mobile art here is dark, moody food
+     photography with no parchment zone — dark ink type would vanish into it.
+     Per the same logic as the end section, the copy flips to warm cream over
+     a dark top scrim so it stays legible against the busy imagery. The subject
+     (bowls / grill) sits in the lower half, leaving the top clear for text. */
+  .maker .scrim-left,
+  .craft .scrim-right {
+    background: linear-gradient(to bottom,
+        rgba(26, 16, 11, 0.82) 0%,
+        rgba(26, 16, 11, 0.6) 34%,
+        rgba(26, 16, 11, 0.18) 62%,
+        rgba(26, 16, 11, 0) 80%);
   }
 
-  .craft .scrim-right {
-    background: linear-gradient(to top, rgba(var(--cream-rgb), 0.5) 0%, rgba(var(--cream-rgb), 0.18) 34%, rgba(var(--cream-rgb), 0) 58%);
+  .maker .title-en,
+  .craft .title-en,
+  .maker .title-th-inline,
+  .craft .title-th-inline {
+    color: #f0c9a3;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  }
+
+  .maker .body,
+  .craft .body {
+    color: #ece0d1;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.65);
   }
 
   /* END */
@@ -929,7 +977,65 @@ img {
   }
 
   .hero .content {
-    padding-top: 13vh;
+    padding-top: calc(var(--nav-h) + 1rem);
+  }
+}
+
+/* ============================================================
+   LANDSCAPE / SHORT VIEWPORTS (landscape phones, short windows)
+   ------------------------------------------------------------
+   A fixed 100vh section with absolutely-positioned, vertically-centred
+   copy clips its own text and slides under the nav when the viewport is
+   shorter than the content. Here each section grows to fit its content and
+   the page scrolls, with the copy anchored safely below the nav.
+   ============================================================ */
+@media (orientation: landscape) and (max-height: 600px) {
+
+  .hero,
+  .section,
+  .section:not(.hero),
+  .video-section {
+    height: auto;
+    min-height: 100svh;
+    aspect-ratio: auto;
+  }
+
+  /* Copy flows in-document (relative) so it can never be clipped, and starts
+     clear of the fixed nav. */
+  .content {
+    position: relative;
+    align-items: flex-start;
+    padding-top: 5.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .copy,
+  .hero .copy,
+  .content-center .copy {
+    max-width: 100%;
+  }
+
+  /* Rein in the display type so a full thought fits one screen height. */
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 3.2rem);
+  }
+
+  .hero-th {
+    font-size: clamp(1.05rem, 3.4vw, 1.6rem);
+    margin-bottom: 0.5em;
+  }
+
+  .hero .body,
+  .chapter .body,
+  .maker .body,
+  .craft .body,
+  .design .body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .end-th-big {
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
   }
 }
 
