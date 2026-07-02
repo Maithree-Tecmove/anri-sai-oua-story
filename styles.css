@@ -352,7 +352,7 @@ img {
   font-style: italic;
   text-transform: none;
   letter-spacing: 1px;
-  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  font-size: clamp(1.35rem, 1.9vw, 2.1rem);
   margin-bottom: 0.4em;
   font-weight: 500;
 }
@@ -533,12 +533,13 @@ img {
   /* hide edges */
 }
 
-/* Centered video box — controls live inside so they track the video. */
+/* Centered video box — controls live inside so they track the video.
+   Centered with inset:0 + margin:auto (not a transform) so GSAP's reveal
+   animation can own the transform without knocking the frame off-centre. */
 .video-frame {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
   width: min(66%, 78vh * 16 / 9);
   aspect-ratio: 16 / 9;
   border-radius: 18px;
@@ -684,15 +685,29 @@ img {
 }
 
 /* ============================================================
-   RESPONSIVE — MOBILE (<= 768px)
+   RESPONSIVE — PORTRAIT PHONES (<= 768px) & PORTRAIT TABLETS
+   ------------------------------------------------------------
+   The portrait composition (mobile art, centred copy, per-section
+   legibility scrims, burger nav) is the right layout for every
+   portrait screen — phones AND portrait tablets — since the section
+   art is portrait and the copy reflows into the open top zone. The
+   TABLET block further down re-tunes type/measure/spacing up for the
+   larger tablet canvas.
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: 768px),
+  (orientation: portrait) and (max-width: 1024px) {
+  /* Size every section to the device height (not the portrait art ratio) so
+     one section always fills exactly one screen; the bg image covers/crops. */
   .section {
-    aspect-ratio: 941 / 1672;
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
   }
 
   .video-section {
-    aspect-ratio: 9 / 16;
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
   }
 
   .bg {
@@ -815,25 +830,70 @@ img {
      long, so lift the block up and tighten the rhythm so it clears the
      croissant subject in the lower half. */
   .hero .content {
-    align-items: flex-start;
+    /* Center the copy both vertically and horizontally within the hero. */
+    align-items: center;
+    justify-content: center;
     /* Clear the fixed nav by its real height + breathing room, so the title
        never tucks under the logo — reliable across every phone size, unlike
        a raw vh value. */
     padding-top: calc(var(--nav-h) + 1.5rem);
+    padding-bottom: calc(var(--nav-h) + 1.5rem);
   }
 
   .hero .copy {
     max-width: 100%;
+    /* All hero elements (titles, label, body, CTA) align to center. */
+    text-align: center;
   }
 
-  /* Taller legibility scrim on the hero — the copy reaches further down
-     into the image than the other sections, so the parchment veil follows. */
+  /* Center the inline-flex CTA button within the centered copy. */
+  .hero .cta-hero {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* HERO (§1) & DESIGN (§6): the copy is centered over warm, mid-tone imagery
+     (golden sky/mountains, tan wall + lit lantern) with no light parchment
+     zone behind the text — so the dark ink/red type was getting swallowed.
+     Keep the parchment veil strong THROUGH the vertical center (where the copy
+     sits) instead of fading out near the top, and add a soft cream halo behind
+     the text so it separates cleanly from the busy background. */
   .hero .scrim-left {
     background: linear-gradient(to bottom,
-        rgba(var(--cream-rgb), 0.5) 0%,
-        rgba(var(--cream-rgb), 0.34) 40%,
-        rgba(var(--cream-rgb), 0.12) 68%,
-        rgba(var(--cream-rgb), 0) 82%);
+        rgba(var(--cream-rgb), 0.52) 0%,
+        rgba(var(--cream-rgb), 0.64) 32%,
+        rgba(var(--cream-rgb), 0.62) 55%,
+        rgba(var(--cream-rgb), 0.32) 72%,
+        rgba(var(--cream-rgb), 0) 88%);
+  }
+
+  .design .scrim-left {
+    background: linear-gradient(to bottom,
+        rgba(var(--cream-rgb), 0.22) 0%,
+        rgba(var(--cream-rgb), 0.58) 28%,
+        rgba(var(--cream-rgb), 0.66) 45%,
+        rgba(var(--cream-rgb), 0.6) 60%,
+        rgba(var(--cream-rgb), 0.26) 78%,
+        rgba(var(--cream-rgb), 0) 92%);
+  }
+
+  .hero .title-en,
+  .hero .title-th,
+  .hero .label,
+  .hero .body,
+  .design .title-en,
+  .design .title-th-inline,
+  .design .body {
+    text-shadow: 0 0 12px rgba(var(--cream-rgb), 0.9),
+      0 1px 3px rgba(var(--cream-rgb), 0.75);
+  }
+
+  .design .title-th-inline {
+    display: block;
+  }
+
+  .chapter .title-break {
+    display: block;
   }
 
   .hero-title {
@@ -863,12 +923,14 @@ img {
   .maker .content,
   .craft .content,
   .design .content {
-    align-items: flex-start;
+    /* Center all copy both vertically and horizontally on mobile. */
+    align-items: center;
+    justify-content: center;
     /* Nav auto-hides while reading but returns on scroll-up, so keep the
        copy below it here too. max() guarantees nav clearance on short
        phones while letting taller phones breathe with a little more space. */
     padding-top: max(calc(var(--nav-h) + 1rem), 9vh);
-    justify-content: flex-start;
+    padding-bottom: max(calc(var(--nav-h) + 1rem), 9vh);
   }
 
   .chapter .copy,
@@ -876,10 +938,11 @@ img {
   .craft .copy,
   .design .copy {
     max-width: 100%;
+    text-align: center;
   }
 
   .chapter .label {
-    font-size: 1.2rem;
+    font-size: 1.65rem;
   }
 
   .chapter .title-en {
@@ -942,12 +1005,23 @@ img {
     max-width: 92%;
   }
 
+  /* Give the end copy the full column so the two Thai lines don't get
+     squeezed into extra wraps. */
+  .end .copy {
+    max-width: 100%;
+  }
+
+  /* Keep each Thai segment on a single line (the <br> between them still
+     forces the intended two-line layout). Sizes are tuned to fit within
+     the mobile column across 320–430px phones. */
   .end-th {
-    font-size: clamp(1.2rem, 5.4vw, 1.8rem);
+    font-size: clamp(0.9rem, 4.3vw, 1.5rem);
+    white-space: nowrap;
   }
 
   .end-th-big {
-    font-size: clamp(1.9rem, 8vw, 2.8rem);
+    font-size: clamp(1.4rem, 6.5vw, 2.4rem);
+    white-space: nowrap;
   }
 
   .end-en {
@@ -960,12 +1034,172 @@ img {
     gap: 1rem;
   }
 
+  /* Larger video on mobile — fill more of the portrait frame. The video is
+     16:9, so width is capped by the section height to avoid overflow. */
+  .video-frame {
+    width: min(94%, 82vh * 16 / 9);
+  }
+
   .vc-btn {
     width: 46px;
     height: 46px;
   }
 
   .scroll-cue {
+    display: none;
+  }
+}
+
+/* ============================================================
+   TABLET — PORTRAIT (769px – 1024px, portrait)
+   ------------------------------------------------------------
+   Portrait tablets inherit the portrait composition from the block
+   above (mobile art + centred copy + legibility scrims + burger nav).
+   Here we adapt that layout to the larger canvas:
+     • revert desktop's full-viewport / scan-QR rules,
+     • let each section keep the portrait image ratio (no cropping),
+     • cap copy to a comfortable reading measure (~640px),
+     • step type up from phone toward desktop,
+     • give the nav bar a little more presence.
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+
+  /* Size each section to the tablet's device height so one section fills one
+     screen (the portrait bg image covers/crops rather than dictating height). */
+  .hero,
+  .section:not(.hero),
+  .section.video-section {
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  /* Touch device: a tappable button reads better than a scan-to-phone
+     QR the tablet can't scan itself. */
+  .end #endPreorder {
+    display: inline-flex;
+  }
+
+  .end .end-qr {
+    display: none;
+  }
+
+  /* Bigger bar to match the roomier screen. */
+  :root {
+    --nav-h: 88px;
+  }
+
+  .nav {
+    padding: 0.9rem 2rem;
+  }
+
+  .nav-logo-img,
+  .nav.scrolled .nav-logo-img {
+    height: 56px;
+  }
+
+  /* Constrain every copy block to a comfortable line length and keep
+     it centred, rather than running text the full tablet width.
+     (Matches the per-section specificity of the portrait block above
+     so these caps win.) */
+  .hero .copy,
+  .chapter .copy,
+  .maker .copy,
+  .craft .copy,
+  .design .copy,
+  .content-center .copy {
+    max-width: min(92%, 760px);
+    margin-inline: auto;
+  }
+
+  /* --- Type scale: sized against BOTH viewport axes ---------------------
+     Portrait tablets span a wide range of proportions — squat (768×1024,
+     ratio .75) to tall (1024×1366) to elongated (820×1180, ratio .69).
+     A width-only (vw) scale leaves type feeling small on the tall canvases
+     and tight on the short ones. Each preferred value here is driven mainly
+     by screen width — calc(A·vw + B·vh) with A weighted well above B — so type
+     scales up with the roomy tablet canvas, while a small vh term keeps the
+     tall/elongated tablets from feeling cramped. The rem min/max caps are
+     stepped up so the larger sizes actually land. --- */
+  .hero-title {
+    font-size: clamp(4.6rem, calc(5.6vw + 2.2vh), 7.2rem);
+  }
+
+  .hero-th {
+    font-size: clamp(2.3rem, calc(2.9vw + 1.1vh), 3.7rem);
+  }
+
+  .hero .label {
+    font-size: clamp(1.15rem, calc(1vw + 0.5vh), 1.6rem);
+    letter-spacing: 3.5px;
+  }
+
+  .hero .body {
+    font-size: clamp(1.55rem, calc(1.7vw + 0.7vh), 2.15rem);
+    line-height: 1.85;
+  }
+
+  .chapter .label {
+    font-size: clamp(2.4rem, calc(2.4vw + 1vh), 3.4rem);
+  }
+
+  .chapter .title-en {
+    font-size: clamp(3.2rem, calc(4.4vw + 1.8vh), 5.1rem);
+  }
+
+  .chapter .title-th {
+    font-size: clamp(2rem, calc(2.6vw + 1vh), 3.15rem);
+  }
+
+  .maker .title-en,
+  .craft .title-en,
+  .design .title-en {
+    font-size: clamp(3rem, calc(3.9vw + 1.6vh), 4.6rem);
+  }
+
+  .design .title-th-inline {
+    display: block;
+  }
+
+  .chapter .title-break {
+    display: block;
+  }
+
+  .chapter .body,
+  .maker .body,
+  .craft .body,
+  .design .body {
+    font-size: clamp(1.55rem, calc(1.7vw + 0.7vh), 2.15rem);
+    line-height: 1.95;
+  }
+
+  .end-th {
+    font-size: clamp(2.1rem, calc(2.6vw + 1vh), 3.2rem);
+  }
+
+  .end-th-big {
+    font-size: clamp(3.1rem, calc(4.1vw + 1.6vh), 4.9rem);
+  }
+
+  .end-en {
+    font-size: clamp(2.2rem, calc(2.6vw + 1vh), 3.4rem);
+  }
+
+  .cta-btn {
+    min-width: min(74%, 480px);
+    font-size: clamp(1.45rem, calc(1.3vw + 0.7vh), 1.95rem);
+    padding: clamp(1.1rem, calc(0.7vw + 0.6vh), 1.5rem) clamp(2.1rem, calc(1.6vw + 1vh), 3.2rem);
+  }
+}
+
+/* Touch tablets (any orientation): never show the desktop scan-QR,
+   since the device can't scan its own screen — offer the button. */
+@media (pointer: coarse) and (max-width: 1024px) {
+  .end #endPreorder {
+    display: inline-flex;
+  }
+
+  .end .end-qr {
     display: none;
   }
 }
@@ -1035,7 +1269,92 @@ img {
   }
 
   .end-th-big {
-    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-size: clamp(1.4rem, 6.5vw, 2.4rem);
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================
+   LANDSCAPE NAV — collapse to burger on short landscape phones
+   ------------------------------------------------------------
+   Landscape phones are wider than 768px and not portrait, so they miss
+   the burger breakpoint above and fall back to the full desktop menu —
+   which overflows the short width (the last item, CONTACT, gets clipped).
+   Collapse to the burger here too. The open drawer wraps its items into
+   rows (not a tall column) since the viewport is wide but short, and
+   scrolls if it still exceeds the height.
+   ============================================================ */
+@media (orientation: landscape) and (max-height: 600px) {
+  .nav {
+    padding: 0.6rem 1.15rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #f0dcc4;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav.menu-open {
+    flex-wrap: wrap;
+    background: rgba(24, 14, 10, 0.98);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    /* Short viewport: scroll the drawer rather than clip items off-screen. */
+    max-height: 100svh;
+    overflow-y: auto;
+  }
+
+  .nav.menu-open .nav-menu {
+    order: 3;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+    margin: 0;
+    padding: 0.9rem 1.5rem 1.15rem;
+    background: transparent;
+  }
+
+  .nav.menu-open .nav-menu a {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav.menu-open .nav-burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
 
